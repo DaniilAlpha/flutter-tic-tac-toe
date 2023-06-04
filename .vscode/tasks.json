@@ -1,0 +1,55 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		// get
+		{
+			"label": "flutter-pub-get",
+			"type": "flutter",
+			"command": "flutter",
+			"args": [
+				"pub",
+				"get",
+			],
+		},
+		// upgrade
+		{
+			"label": "flutter-pub-upgrade",
+			"dependsOn": "flutter-pub-get",
+			"type": "flutter",
+			"command": "flutter",
+			"args": [
+				"pub",
+				"upgrade",
+			],
+		},
+		// clean
+		{
+			"label": "flutter-clean",
+			"type": "flutter",
+			"command": "flutter",
+			"args": [
+				"clean",
+			],
+		},
+		// // build apk
+		// {
+		// 	"label": "flutter-build-apk",
+		// 	"type": "flutter",
+		// 	"command": "flutter",
+		// 	"args": [
+		// 		"build",
+		// 		"apk",
+		// 	],
+		// },
+		// // build windows
+		// {
+		// 	"label": "flutter-build-windows",
+		// 	"type": "flutter",
+		// 	"command": "flutter",
+		// 	"args": [
+		// 		"build",
+		// 		"windows",
+		// 	],
+		// },
+	]
+}

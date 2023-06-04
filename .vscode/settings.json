@@ -1,0 +1,24 @@
+{
+    "activitusbar.views": [
+        {
+            "name": "task.flutter-pub-upgrade",
+            "codicon": "arrow-down",
+            "tooltip": "flutter pub get"
+        },
+        {
+            "name": "task.flutter-clean",
+            "codicon": "trash",
+            "tooltip": "flutter clean"
+        },
+        // {
+        //     "name": "task.flutter-build-apk",
+        //     "codicon": "package",
+        //     "tooltip": "flutter build apk"
+        // },
+        // {
+        //     "name": "task.flutter-build-windows",
+        //     "codicon": "package",
+        //     "tooltip": "flutter build windows"
+        // },
+    ]
+}
