@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:tic_tac_toe/core/data/config.dart";
-import "package:tic_tac_toe/core/domain/math.dart";
 import "package:tic_tac_toe/core/presentation/my_theme.dart";
 import "package:tic_tac_toe/game/domain/entities/ai.dart";
 import "package:tic_tac_toe/game/domain/entities/field/field.dart";
@@ -14,22 +13,8 @@ import "package:tic_tac_toe/game/domain/usecases/restart_game_usecase.dart";
 import "package:tic_tac_toe/game/presentation/bloc/game_cubit.dart";
 import "package:tic_tac_toe/game/presentation/ui/game_page.dart";
 
-const _humanNames = [
-  "Unlucky Luke",
-  "Miss Fortune",
-  "Epic Fail",
-  "Loser Larry",
-  "Bad Luck Brian",
-];
-const _aiNames = [
-  "Ovuvuevuevue Enyetuenwuevue Ugbemugbem Osas",
-  "The Terminator",
-  "Noob Crusher",
-  "Invictus",
-  "Zero Error",
-];
-final humanName = _humanNames[rng.nextInt(_humanNames.length)];
-final aiName = _aiNames[rng.nextInt(_aiNames.length)];
+const humanName = "Loser Larry";
+const aiName = "The Terminator";
 
 final _field = Field(Config.fieldSize.w, Config.fieldSize.h);
 final _game = Game(
