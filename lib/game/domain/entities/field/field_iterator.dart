@@ -1,6 +1,6 @@
 part of "field.dart";
 
-abstract base class _FieldBaseIterator implements Iterator<CellValue?> {
+sealed class _FieldBaseIterator implements Iterator<CellValue?> {
   _FieldBaseIterator({
     required this.width,
     required this.height,
@@ -14,6 +14,14 @@ abstract base class _FieldBaseIterator implements Iterator<CellValue?> {
 
   @override
   CellValue? get current => _cells[_x + _y * width];
+}
+
+sealed class FieldLineIterator extends _FieldBaseIterator {
+  FieldLineIterator({
+    required super.width,
+    required super.height,
+    required super.cells,
+  });
 }
 
 final class FieldGridIterator extends _FieldBaseIterator {
@@ -39,7 +47,7 @@ final class FieldGridIterator extends _FieldBaseIterator {
   }
 }
 
-final class FieldAxisIterator extends _FieldBaseIterator {
+final class FieldAxisIterator extends FieldLineIterator {
   FieldAxisIterator(
     int n, {
     required this.isRow,
@@ -66,7 +74,7 @@ final class FieldAxisIterator extends _FieldBaseIterator {
   }
 }
 
-final class FieldDiagonalIterator extends _FieldBaseIterator {
+final class FieldDiagonalIterator extends FieldLineIterator {
   FieldDiagonalIterator(
     int n, {
     required this.isLtR,

@@ -22,6 +22,8 @@ final class Field {
     height: height,
     cells: _cells,
   );
+  bool get isFull => grid.isFull;
+
   late final rows = List.generate(
     height,
     (y) => FieldAxisIterable(
@@ -67,12 +69,16 @@ final class Field {
     growable: false,
   );
   late final _lines = [...rows, ...columns, ...diagonals, ...crossDiagonals];
-  bool get isFull => grid.isFull;
 
   CellValue? at(FieldPos pos) => _cells[pos.x + pos.y * width];
 
-  bool hasLineFullOf(CellValue cellValue) =>
-      _lines.any((line) => line.isFullOf(cellValue));
+  FieldLineIterable? lineFullOf(CellValue cellValue) {
+    for (final line in _lines) {
+      if (line.isFullOf(cellValue)) return line;
+    }
+
+    return null;
+  }
 
   void markX(FieldPos pos) => mark(pos, CellValue.X);
   void markO(FieldPos pos) => mark(pos, CellValue.O);

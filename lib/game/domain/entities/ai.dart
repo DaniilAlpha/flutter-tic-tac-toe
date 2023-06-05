@@ -1,12 +1,11 @@
 import "package:tic_tac_toe/game/domain/entities/field/field.dart";
 
 class Ai {
-  Ai({required this.field});
+  Ai({required Field field}) : _field = field;
 
   static const opsLimit = 6500000;
-  static const maxScore = 2000000000;
 
-  final Field field;
+  final Field _field;
   late final _maxDepth = _countMaxDepth();
 
   FieldPos pickBestPosFor(CellValue cellValue) {
@@ -16,9 +15,9 @@ class Ai {
     FieldPos? bestPos;
 
     int minimax(Field field, {int depth = 0}) {
-      if (field.hasLineFullOf(cellValue)) {
+      if (field.lineFullOf(cellValue) != null) {
         return 1;
-      } else if (field.hasLineFullOf(opponentCellValue)) {
+      } else if (field.lineFullOf(opponentCellValue) != null) {
         return -1;
       } else if (field.isFull) {
         return 0;
@@ -27,7 +26,7 @@ class Ai {
       if (depth >= _maxDepth) return 0;
 
       final isForSelf = depth % 2 == 0;
-      var bestScore = isForSelf ? -maxScore : maxScore;
+      var bestScore = isForSelf ? -2000000000 : 2000000000;
       for (var y = 0; y < field.height; y++) {
         for (var x = 0; x < field.width; x++) {
           final pos = FieldPos(x, y);
@@ -51,18 +50,17 @@ class Ai {
       return bestScore;
     }
 
-    minimax(field);
+    minimax(_field);
+
     return bestPos!;
   }
 
   int _countMaxDepth() {
     var opsCount = 1;
-    for (var i = field.size; i > 0; i--) {
+    for (var i = _field.size; i > 0; i--) {
       opsCount *= i;
-      if (opsCount >= opsLimit) {
-        return field.size - i;
-      }
+      if (opsCount >= opsLimit) return _field.size - i;
     }
-    return field.size;
+    return _field.size;
   }
 }

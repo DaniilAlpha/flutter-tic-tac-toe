@@ -21,6 +21,7 @@ final class GameCubit extends Cubit<GameState> {
   }
 
   static const aiThinkingDuration = Duration(milliseconds: 400);
+  static const gameEndingDuration = Duration(milliseconds: 3000);
 
   final GetPlayersUsecase _getPlayersUsecase;
   final MarkUsecase _markUsecase;
@@ -40,12 +41,16 @@ final class GameCubit extends Cubit<GameState> {
     _updateTurn();
   }
 
-  Future<void> _mark(FieldPos pos) async {
+  void _mark(FieldPos pos) {
     final isEnded = _markUsecase(pos);
-    isEnded ? _endGame() : _updateTurn();
+    _updateTurn();
+    if (isEnded) _endGame();
   }
 
-  void _endGame() => emit(GameEnded(winner: _getPlayersUsecase.winner));
+  Future<void> _endGame() async {
+    await Future.delayed(gameEndingDuration);
+    emit(GameEnded(winner: _getPlayersUsecase.winner));
+  }
 
   void _updateTurn() {
     emit(GamePlaying(currentPlayer: _currentPlayer));

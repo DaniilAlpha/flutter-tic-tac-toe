@@ -42,6 +42,7 @@ class FieldWidget extends StatelessWidget {
           child: DividerTheme(
             data: DividerThemeData(space: lineWidth, thickness: lineWidth),
             child: Stack(
+              fit: StackFit.expand,
               children: [
                 _constructGrid(),
                 GridView.count(
@@ -52,9 +53,7 @@ class FieldWidget extends StatelessWidget {
                       for (var x = 0; x < field.width; x++)
                         InkWell(
                           onTap: () => onCellPressed(FieldPos(x, y)),
-                          child: AnimatedMarkWidget(
-                            field.at(FieldPos(x, y)),
-                          ),
+                          child: AnimatedMarkWidget(field.at(FieldPos(x, y))),
                         ),
                   ],
                 ),

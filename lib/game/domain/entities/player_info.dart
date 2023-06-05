@@ -14,7 +14,7 @@ final class PlayerInfo {
   final int id;
   final String name;
 
-  // TODO? perhaps remove from the domain layer
+  // TODO? perhaps remove from [PlayerInfo] layer
   final PlayerType? type;
 
   bool get isUi => type == PlayerType.ui;

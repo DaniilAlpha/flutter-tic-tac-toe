@@ -1,6 +1,6 @@
 part of "field.dart";
 
-abstract base class _FieldBaseIterable with IterableMixin<CellValue?> {
+sealed class _FieldBaseIterable with IterableMixin<CellValue?> {
   _FieldBaseIterable({
     required this.width,
     required this.height,
@@ -16,6 +16,14 @@ abstract base class _FieldBaseIterable with IterableMixin<CellValue?> {
       every((element) => element == cellValue);
 }
 
+sealed class FieldLineIterable extends _FieldBaseIterable {
+  FieldLineIterable({
+    required super.width,
+    required super.height,
+    required super.cells,
+  });
+}
+
 final class FieldGridIterable extends _FieldBaseIterable {
   FieldGridIterable({
     required super.width,
@@ -28,7 +36,7 @@ final class FieldGridIterable extends _FieldBaseIterable {
       FieldGridIterator(width: width, height: height, cells: _cells);
 }
 
-final class FieldAxisIterable extends _FieldBaseIterable {
+final class FieldAxisIterable extends FieldLineIterable {
   FieldAxisIterable(
     this.n, {
     required this.isRow,
@@ -45,7 +53,7 @@ final class FieldAxisIterable extends _FieldBaseIterable {
       isRow: isRow, width: width, height: height, cells: _cells);
 }
 
-final class FieldDiagonalIterable extends _FieldBaseIterable {
+final class FieldDiagonalIterable extends FieldLineIterable {
   FieldDiagonalIterable(
     this.n, {
     required this.isLtR,
