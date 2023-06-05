@@ -21,7 +21,7 @@ final class GameCubit extends Cubit<GameState> {
   }
 
   static const aiThinkingDuration = Duration(milliseconds: 400);
-  static const gameEndingDuration = Duration(milliseconds: 3000);
+  static const gameEndingDuration = Duration(milliseconds: 1000);
 
   final GetPlayersUsecase _getPlayersUsecase;
   final MarkUsecase _markUsecase;
