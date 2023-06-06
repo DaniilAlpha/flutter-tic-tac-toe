@@ -21,7 +21,7 @@ final class GameCubit extends Cubit<GameState> {
   }
 
   static const aiThinkingDuration = Duration(milliseconds: 400);
-  static const gameEndingDuration = Duration(milliseconds: 1000);
+  static const gameEndingDuration = Duration(milliseconds: 800);
 
   final GetPlayersUsecase _getPlayersUsecase;
   final MarkUsecase _markUsecase;
@@ -30,36 +30,36 @@ final class GameCubit extends Cubit<GameState> {
 
   Player get _currentPlayer => _getPlayersUsecase.currentPlayer;
 
-  void mark(FieldPos pos) {
+  Future<void> mark(FieldPos pos) async {
     if (!_currentPlayer.info.isUi) return;
 
-    _mark(pos);
+    await _mark(pos);
   }
 
-  void restart() {
+  Future<void> restart() async {
     _restartGameUsecase();
-    _updateTurn();
+    await _updateTurn();
   }
 
-  void _mark(FieldPos pos) {
+  Future<void> _mark(FieldPos pos) async {
     final isEnded = _markUsecase(pos);
-    _updateTurn();
-    if (isEnded) _endGame();
+    isEnded ? await _endGame() : await _updateTurn();
   }
 
   Future<void> _endGame() async {
+    emit(GamePlaying(currentPlayer: _currentPlayer));
     await Future.delayed(gameEndingDuration);
     emit(GameEnded(winner: _getPlayersUsecase.winner));
   }
 
-  void _updateTurn() {
+  Future<void> _updateTurn() async {
     emit(GamePlaying(currentPlayer: _currentPlayer));
-    if (_currentPlayer.info.isAi) _markAi();
+    if (_currentPlayer.info.isAi) await _markAi();
   }
 
   Future<void> _markAi() async {
     await Future.delayed(aiThinkingDuration);
-    _mark(await _pickBestUsecase(_currentPlayer.cellValue));
+    await _mark(await _pickBestUsecase(_currentPlayer.cellValue));
   }
 }
 
