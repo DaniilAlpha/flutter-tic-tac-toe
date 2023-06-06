@@ -78,6 +78,7 @@ linter:
     # async
     cancel_subscriptions: true
     close_sinks: true
+    unawaited_futures: true
 
     # others
     conditional_uri_does_not_exist: true
