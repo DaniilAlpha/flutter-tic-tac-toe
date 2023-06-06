@@ -77,32 +77,33 @@ final class FieldAxisIterator extends FieldLineIterator {
 final class FieldDiagonalIterator extends FieldLineIterator {
   FieldDiagonalIterator(
     int n, {
-    required this.isLtR,
+    required this.isStraight,
+    required this.isHorizontal,
     required super.width,
     required super.height,
     required super.cells,
   }) {
-    if (width > height) {
-      _x = isLtR ? n - 1 : -n + (width - 1) + 1;
-      _y = -1;
+    if (isHorizontal) {
+      _x = n - 1;
+      _y = isStraight ? -1 : (height - 1) + 1;
     } else {
-      _x = isLtR ? -1 : (width - 1) + 1;
+      _x = isStraight ? -1 : (width - 1) + 1;
       _y = n - 1;
     }
   }
 
-  final bool isLtR;
+  final bool isStraight, isHorizontal;
 
   @override
   bool moveNext() {
-    if (isLtR) {
+    if (isHorizontal) {
       _x++;
-      _y++;
-      if (_x < width && _y < height) return true;
+      isStraight ? _y++ : _y--;
+      if (_x < width && (isStraight ? _y < height : _y >= 0)) return true;
     } else {
-      _x--;
+      isStraight ? _x++ : _x--;
       _y++;
-      if (_x >= 0 && _y < height) return true;
+      if ((isStraight ? _x < width : _x >= 0) && _y < height) return true;
     }
     return false;
   }

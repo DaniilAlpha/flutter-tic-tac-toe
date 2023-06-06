@@ -50,7 +50,7 @@ final class Field {
     1 + (width - height).abs(),
     (n) => FieldDiagonalIterable(
       n,
-      isLtR: true,
+      isStraight: true,
       width: width,
       height: height,
       cells: _cells,
@@ -61,7 +61,7 @@ final class Field {
     1 + (width - height).abs(),
     (n) => FieldDiagonalIterable(
       n,
-      isLtR: false,
+      isStraight: false,
       width: width,
       height: height,
       cells: _cells,

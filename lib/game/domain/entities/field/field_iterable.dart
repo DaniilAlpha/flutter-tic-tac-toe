@@ -56,16 +56,23 @@ final class FieldAxisIterable extends FieldLineIterable {
 final class FieldDiagonalIterable extends FieldLineIterable {
   FieldDiagonalIterable(
     this.n, {
-    required this.isLtR,
+    required this.isStraight,
     required super.width,
     required super.height,
     required super.cells,
   });
 
   final int n;
-  final bool isLtR;
+  final bool isStraight;
+  late final bool isHorizontal = width > height;
 
   @override
-  FieldDiagonalIterator get iterator => FieldDiagonalIterator(n,
-      isLtR: isLtR, width: width, height: height, cells: _cells);
+  FieldDiagonalIterator get iterator => FieldDiagonalIterator(
+        n,
+        isStraight: isStraight,
+        isHorizontal: isHorizontal,
+        width: width,
+        height: height,
+        cells: _cells,
+      );
 }
