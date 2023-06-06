@@ -1,4 +1,4 @@
-import "dart:math" as math;
+import "dart:math" as dart;
 import "dart:math" hide log;
 
 export "dart:math" hide log;
@@ -28,7 +28,7 @@ double fact(num x) {
 ///
 /// Returns negative infinity if [x] is equal to zero.
 /// Returns NaN if [x] is NaN or less than zero.
-const ln = math.log;
+const ln = dart.log;
 
 /// Converts [x] to a [double] and returns the common logarithm of the value.
 ///
