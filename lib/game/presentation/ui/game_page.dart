@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:tic_tac_toe/core/presentation/my_theme.dart";
 import "package:tic_tac_toe/core/presentation/scrollable_page.dart";
 import "package:tic_tac_toe/core/presentation/space.dart";
 import "package:tic_tac_toe/game/domain/entities/field/field.dart";
@@ -17,8 +18,6 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  static const transitionDuration = Duration(milliseconds: 300);
-
   late final cubit = context.read<GameCubit>();
 
   Field get field => widget.field;
@@ -72,11 +71,12 @@ class _GamePageState extends State<GamePage> {
               };
 
               return AnimatedSize(
-                duration: transitionDuration,
+                duration: MyTheme.subpageTransitionDuration,
+                curve: MyTheme.subpageTransitionInCurve,
                 child: AnimatedSwitcher(
-                  duration: transitionDuration,
-                  switchInCurve: Curves.easeOutCubic,
-                  switchOutCurve: Curves.easeInExpo,
+                  duration: MyTheme.subpageTransitionDuration,
+                  switchInCurve: MyTheme.subpageTransitionInCurve,
+                  switchOutCurve: MyTheme.subpageTransitionOutCurve,
                   child: page,
                 ),
               );

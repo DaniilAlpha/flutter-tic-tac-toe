@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:tic_tac_toe/core/domain/math.dart";
 import "package:tic_tac_toe/core/presentation/my_theme.dart";
 import "package:tic_tac_toe/game/domain/entities/field/field.dart";
+import "package:tic_tac_toe/game/presentation/ui/complete_line_widget.dart";
 import "package:tic_tac_toe/game/presentation/ui/mark_widget.dart";
 
 class FieldWidget extends StatelessWidget {
@@ -56,6 +57,14 @@ class FieldWidget extends StatelessWidget {
                           child: AnimatedMarkWidget(field.at(FieldPos(x, y))),
                         ),
                   ],
+                ),
+                CompleteLineWidget(
+                  line: field.lineFullOf(CellValue.X),
+                  color: Colors.red,
+                ),
+                CompleteLineWidget(
+                  line: field.lineFullOf(CellValue.O),
+                  color: Colors.blue,
                 ),
               ],
             ),
