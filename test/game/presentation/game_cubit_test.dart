@@ -10,7 +10,7 @@ import "package:tic_tac_toe/game/domain/usecases/restart_game_usecase.dart";
 import "package:tic_tac_toe/game/presentation/bloc/game_cubit.dart";
 
 void main() {
-  final playerInfo = PlayerInfo(null);
+  final playerInfo = PlayerInfo(null, type: PlayerType.ui);
 
   late Field field;
   late Game game;
@@ -34,7 +34,7 @@ void main() {
   });
 
   test("winning game make state 'ended' and saves winner", () async {
-    cubit.mark(const FieldPos(0, 0));
+    await cubit.mark(const FieldPos(0, 0));
     expect((cubit.state as GameEnded).winner!.info, playerInfo);
   });
 }
