@@ -93,7 +93,7 @@ class CompleteLinePainter extends CustomPainter {
     canvas.drawLine(
       data.points.$1 * cellDim,
       lerpOffset(data.points.$1, data.points.$2, time) * cellDim,
-      _paint..strokeWidth = cellDim / 10,
+      _paint..strokeWidth = cellDim * .16,
     );
   }
 
